@@ -8,11 +8,16 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "apk-release": "cd android && ./gradlew assembleRelease && cd .."
+    "apk-release": "cd android && ./gradlew assembleRelease && cd ..",
+    "clean-ios": "cd ios && pod install && cd ..",
+    "clean-android": "cd android && ./gradlew clean && cd .."
   },
   "dependencies": {
+    "@types/react-native": "^0.72.0",
+    "axios": "^1.4.0",
     "react": "18.2.0",
-    "react-native": "0.71.8"
+    "react-native": "0.71.8",
+    "react-native-config": "^1.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
