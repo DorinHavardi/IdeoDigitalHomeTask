@@ -28,8 +28,8 @@ const SheetTable: FC<ITable> = ({tableData}) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 100,
-    paddingHorizontal: 30,
+    padding: 25,
+    paddingTop: 0
   },
 });
 

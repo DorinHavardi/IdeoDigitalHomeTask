@@ -1,17 +1,13 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react';
-import {
-  ActivityIndicator,
-  Alert,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native';
+import {Alert, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {API_URL} from '../config/config';
 import {formatResponse} from '../utils/formatSheetResponse.util';
 import SheetTable from '../components/table.cmp';
 import Pie from '../components/pieChart.cmp';
 import {ExcelIcon} from '../components/icons/excel.icon';
+import {getFontSizeByWindowWidth} from '../utils/window.utils';
+import Loader from '../components/loader.cmp';
 
 const Main = () => {
   const [tableData, setTableData] = useState<any>();
@@ -30,21 +26,32 @@ const Main = () => {
   }, []);
 
   return (
-    <View>
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <Text>Google Sheet DB</Text>
+    <ScrollView contentInsetAdjustmentBehavior="automatic">
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>Google Sheet DB</Text>
         <ExcelIcon />
-        {tableData ? (
-          <View>
-            <SheetTable tableData={tableData} />
-            <Pie pieData={tableData} />
-          </View>
-        ) : (
-          <ActivityIndicator color={'blue'} size={'large'} />
-        )}
-      </ScrollView>
-    </View>
+      </View>
+      {tableData ? (
+        <>
+          <SheetTable tableData={tableData} />
+          <Pie pieData={tableData} />
+        </>
+      ) : (
+        <Loader />
+      )}
+    </ScrollView>
   );
 };
 
 export default Main;
+
+const styles = StyleSheet.create({
+  titleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: getFontSizeByWindowWidth(20),
+  },
+});

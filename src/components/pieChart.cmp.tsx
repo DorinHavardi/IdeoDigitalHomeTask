@@ -3,6 +3,7 @@ import React, {FC, useEffect, useState} from 'react';
 import PieChart from 'react-native-pie-chart';
 import {Colors} from '../theme/Colors';
 import IPie from '../types/pie.type';
+import {getFontSizeByWindowWidth} from '../utils/window.utils';
 
 const Pie: FC<IPie> = ({pieData}) => {
   const {charcoal, persianGreen, saffron, sandyBrown} = Colors;
@@ -31,14 +32,14 @@ const Pie: FC<IPie> = ({pieData}) => {
   }, []);
 
   return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Basic</Text>
-        <PieChart
-          widthAndHeight={widthAndHeight}
-          series={segmented}
-          sliceColor={sliceColor}
-        />
-      </View>
+    <View style={styles.container}>
+      <Text style={styles.title}>Segmentation</Text>
+      <PieChart
+        widthAndHeight={widthAndHeight}
+        series={segmented}
+        sliceColor={sliceColor}
+      />
+    </View>
   );
 };
 
@@ -46,9 +47,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    padding: 25,
+    paddingTop: 0,
   },
   title: {
-    fontSize: 24,
+    fontSize: getFontSizeByWindowWidth(16),
     margin: 10,
   },
 });
