@@ -8,7 +8,8 @@ import {getFontSizeByWindowWidth} from '../utils/window.utils';
 const Pie: FC<IPie> = ({pieData}) => {
   const {charcoal, persianGreen, saffron, sandyBrown} = Colors;
   const widthAndHeight = 250;
-  const sliceColor = [charcoal, persianGreen, saffron, sandyBrown];
+  const sliceColors = [charcoal, persianGreen, saffron, sandyBrown];
+  const indexLabels = ['0-18', '19-35', '36-70', '70+'];
 
   const [segmented, setSegmented] = useState<number[]>([1, 1, 1, 1]);
   let ages = pieData.obj.map((a: any) => +a.Age);
@@ -37,8 +38,17 @@ const Pie: FC<IPie> = ({pieData}) => {
       <PieChart
         widthAndHeight={widthAndHeight}
         series={segmented}
-        sliceColor={sliceColor}
+        sliceColor={sliceColors}
       />
+      <Text style={styles.title}>Index</Text>
+      <View style={styles.indexContainer}>
+        {sliceColors.map((color: string, i: number) => (
+          <View style={styles.cubeLabel} key={i}>
+            <View style={[styles.cube, {backgroundColor: color}]} />
+            <Text>{indexLabels[i]}</Text>
+          </View>
+        ))}
+      </View>
     </View>
   );
 };
@@ -53,6 +63,19 @@ const styles = StyleSheet.create({
   title: {
     fontSize: getFontSizeByWindowWidth(16),
     margin: 10,
+  },
+  indexContainer: {
+    flexDirection: 'row',
+  },
+  cubeLabel: {
+    flexDirection: 'row',
+    marginEnd: 5,
+    alignItems: 'center',
+  },
+  cube: {
+    height: 20,
+    width: 20,
+    margin: 2.5,
   },
 });
 

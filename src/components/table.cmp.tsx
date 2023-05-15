@@ -26,11 +26,11 @@ const SheetTable: FC<ITable> = ({tableData}) => {
   );
 };
 
+export default React.memo(SheetTable);
+
 const styles = StyleSheet.create({
   container: {
     padding: 25,
-    paddingTop: 0
+    paddingTop: 0,
   },
 });
-
-export default React.memo(SheetTable);
