@@ -1,12 +1,9 @@
 import {View, StyleSheet} from 'react-native';
-import React, {FC, useEffect} from 'react';
+import React, {FC} from 'react';
 import {DataTable} from 'react-native-paper';
+import ITable from '../types/table.type';
 
-interface TableProps {
-  tableData: any;
-}
-
-const SheetTable: FC<TableProps> = ({tableData}) => {
+const SheetTable: FC<ITable> = ({tableData}) => {
   const titles = tableData.keys;
   const values = tableData.obj;
 
