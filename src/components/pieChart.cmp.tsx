@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import React, {FC, useEffect, useState} from 'react';
 import PieChart from 'react-native-pie-chart';
 import {Colors} from '../theme/Colors';
@@ -10,9 +10,12 @@ const Pie: FC<IPie> = ({pieData}) => {
   const widthAndHeight = 250;
   const sliceColors = [charcoal, persianGreen, saffron, sandyBrown];
   const indexLabels = ['0-18', '19-35', '36-70', '70+'];
-
   const [segmented, setSegmented] = useState<number[]>([1, 1, 1, 1]);
   let ages = pieData.obj.map((a: any) => +a.Age);
+
+  useEffect(() => {
+    segmentedAges(ages);
+  }, [pieData]);
 
   const segmentedAges = (ages: []) => {
     if (ages.length) {
@@ -27,10 +30,6 @@ const Pie: FC<IPie> = ({pieData}) => {
       setSegmented(levels);
     }
   };
-
-  useEffect(() => {
-    segmentedAges(ages);
-  }, []);
 
   return (
     <View style={styles.container}>
@@ -52,6 +51,8 @@ const Pie: FC<IPie> = ({pieData}) => {
     </View>
   );
 };
+
+export default React.memo(Pie);
 
 const styles = StyleSheet.create({
   container: {
@@ -78,5 +79,3 @@ const styles = StyleSheet.create({
     margin: 2.5,
   },
 });
-
-export default React.memo(Pie);
